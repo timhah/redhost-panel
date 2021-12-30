@@ -164,3 +164,11 @@ s
 Ich hoffe, dass dir die Hilfe helfen konnte.
 
 Für Fragen stehen wir Ihnen gerne zur Verfügung.
+	
+# Was ist als nächstes geplant?
+
+- Integration von Cloud vServern von Hetzner Online GmbH
+- Installer für Gameserver, Webserver etc. via Net/SSH2
+- Integration von weitere Zahlungs-Modulen
+- Integration von News-System
+- Integration von Partner-System
