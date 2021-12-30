@@ -172,3 +172,5 @@ Für Fragen stehen wir Ihnen gerne zur Verfügung.
 - Integration von weitere Zahlungs-Modulen
 - Integration von News-System
 - Integration von Partner-System
+- Erweiterung des Registrierungs-Formular (Registrierung für Privat und Business Kunden)
+- Erweiterung des Login-Formulars (Zusätzliche Authentifizierung durch Benutzername)
