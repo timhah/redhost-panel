@@ -135,7 +135,8 @@ s
 	
 	#Venocix
 	VENOCIX_API_URL="https://reseller-sandbox.hosterapi.de/api/v1"
-	VENOCIX_API_KEY="Uhkc6WIDHX86nON7q0gO2F1flKRcJvmyJflpefVW"
+	#VENOCIX_API_URL="https://reseller.hosterapi.de/api/v1"
+	VENOCIX_API_KEY=""
 	
 2.6 Datei /public/.htaccess
 
