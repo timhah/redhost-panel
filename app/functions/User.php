@@ -195,6 +195,125 @@ class User extends Controller
         return $os_platform;
     }
 
+    public function getBrowser($user_agent): string
+    {
+        $browser = "Unbekannt";
+
+        $browser_array = array(
+            '/msie/i'      => 'Internet Explorer',
+            '/trident/i'   => 'Internet Explorer',
+            '/edge/i'      => 'Microsoft Edge',
+            '/firefox/i'   => 'Firefox',
+            '/safari/i'    => 'Safari',
+            '/chrome/i'    => 'Chrome',
+            '/opera/i'     => 'Opera',
+            '/netscape/i'  => 'Netscape',
+            '/maxthon/i'   => 'Maxthon',
+            '/konqueror/i' => 'Konqueror',
+            '/mobile/i'    => 'Handy-Browser',
+            '/brave/i'     => 'Brave',
+            '/epiphany/i'  => 'Epiphany',
+            '/ucbrowser/i' => 'UC Browser',
+            '/yabrowser/i' => 'Yandex Browser',
+            '/waterfox/i'  => 'Waterfox',
+            '/sleipnir/i'  => 'Sleipnir',
+            '/lunascape/i' => 'Lunascape',
+            '/avant/i'     => 'Avant Browser',
+            '/webpositive/i'=> 'WebPositive',
+            '/aol/i'       => 'AOL Browser',
+            '/k-meleon/i'  => 'K-Meleon',
+            '/seamonkey/i' => 'SeaMonkey',
+            '/galeon/i'    => 'Galeon',
+            '/iron/i'      => 'SRWare Iron',
+            '/comodo/i'    => 'Comodo Dragon',
+            '/rockmelt/i'  => 'RockMelt',
+            '/slimboat/i'  => 'SlimBrowser',
+            '/flock/i'     => 'Flock',
+            '/netsurf/i'   => 'NetSurf',
+            '/epic/i'      => 'Epic Browser',
+            '/dolphin/i'   => 'Dolphin',
+            '/qupzilla/i'  => 'QupZilla',
+            '/silk/i'      => 'Amazon Silk',
+            '/otter/i'     => 'Otter Browser',
+            '/gnome\-web/i'=> 'Epiphany (GNOME Web)',
+            '/tizen/i'     => 'Tizen Browser',
+            '/slimjet/i'   => 'Slimjet',
+            '/cyberfox/i'  => 'Cyberfox',
+            '/icedragon/i' => 'Comodo IceDragon',
+            '/vivaldi/i'   => 'Vivaldi',
+            '/coc_coc/i'   => 'Coc Coc',
+            '/sogou/i'     => 'Sogou Browser',
+            '/qihoo/i'     => '360 Secure Browser',
+            '/huohou/i'    => 'Huohou Browser',
+            '/miui/i'      => 'Mi Browser',
+            '/huawei/i'    => 'Huawei Browser',
+            '/oneplus/i'   => 'OnePlus Browser',
+            '/meizu/i'     => 'Meizu Browser',
+            '/nokia/i'     => 'Nokia Browser',
+            '/lenovo/i'    => 'Lenovo Browser',
+            '/zte/i'       => 'ZTE Browser',
+            '/leeco/i'     => 'LeEco Browser',
+            '/realme/i'    => 'Realme Browser',
+            '/tecent/i'    => 'Tencent QQ Browser',
+            '/baidu/i'     => 'Baidu Browser',
+            '/vivo/i'      => 'Vivo Browser',
+            '/mxios/i'     => 'Maxthon for iOS',
+            '/baidubox/i'  => 'Baidu Box App',
+            '/qqlive/i'    => 'Tencent QQ Live App',
+            '/weibo/i'     => 'Sina Weibo App',
+            '/wechat/i'    => 'WeChat App',
+            '/alipay/i'    => 'Alipay Mini Program',
+            '/taobao/i'    => 'Taobao Mini Program',
+            '/palemoon/i'  => 'Pale Moon',
+            '/odo/i'       => 'Opera Neon',
+            '/midori/i'    => 'Midori',
+            '/rekonq/i'    => 'Rekonq',
+            '/uzbl/i'      => 'Uzbl',
+            '/whale/i'     => 'Naver Whale',
+            '/yandexsearch/i' => 'Yandex Search App',
+            '/qqbrowser/i' => 'QQ Browser',
+            '/baidubrowser/i' => 'Baidu Browser',
+            '/liebaofast/i' => 'Liebao Browser (LBBrowser)',
+            '/liebaomini/i' => 'Liebao Mini Browser',
+            '/duckduckgo/i' => 'DuckDuckGo Browser',
+            '/bb10/i'      => 'BlackBerry 10 Browser',
+            '/edgeios/i'   => 'Microsoft Edge (iOS)',
+            '/edgeandroid/i' => 'Microsoft Edge (Android)',
+            '/focus/i'     => 'Firefox Focus',
+            '/focusios/i'  => 'Firefox Focus (iOS)',
+            '/adobeair/i'  => 'Adobe AIR Application',
+            '/kindle/i'    => 'Amazon Kindle',
+            '/iridium/i'   => 'Iridium Browser',
+            '/vewd/i'      => 'Vewd (formerly Opera TV)',
+            '/viera/i'     => 'Panasonic Viera TV Browser',
+            '/snapchat/i'  => 'Snapchat App',
+            '/puffin/i'    => 'Puffin Browser',
+            '/webos/i'     => 'webOS Browser',
+            '/maemo/i'     => 'Maemo Browser (Nokia N900)',
+            '/meego/i'     => 'MeeGo Browser',
+            '/wii/i'       => 'Nintendo Wii Browser',
+            '/psp/i'       => 'PlayStation Portable Browser',
+            '/camino/i'    => 'Camino',
+            '/kazehakase/i'=> 'Kazehakase',
+            '/gobrowser/i' => 'GO Browser',
+            '/tor/i'       => 'TOR (The Onion Router)',
+            // Browser, die von Regierungsbehörden oder militärischen Organisationen verwendet werden
+            '/usgcb/i'     => 'U.S. Government Web Browser',
+            '/qubes/i'     => 'Qubes OS Secure Browser',
+            '/swb/i'       => 'Secure Web Browser (SWB)',
+            '/iceweasel/i' => 'IceWeasel',
+            '/gsb/i'       => 'Government Secure Browser (GSB)'
+        );
+
+        foreach ($browser_array as $regex => $value) {
+            if (preg_match($regex, $user_agent)) {
+                $browser = $value;
+            }
+        }
+
+        return $browser;
+    }
+
     public function getIP()
     {
         foreach (array('HTTP_CLIENT_IP', 'HTTP_X_FORWARDED_FOR', 'HTTP_X_FORWARDED', 'HTTP_X_CLUSTER_CLIENT_IP', 'HTTP_FORWARDED_FOR', 'HTTP_FORWARDED', 'REMOTE_ADDR') as $key){
